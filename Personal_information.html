@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Personal Information Form</title>
+    <style>
+        :root {
+            --primary-sky: #0ea5e9; 
+            --primary-hover: #0284c7;
+            --bg-neutral: #f8fafc;
+            --card-white: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-gray: #cbd5e1;
+            --error-color: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-neutral);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-container {
+            background: var(--card-white);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 950px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .form-header h1 {
+            font-size: 2.25rem;
+            margin: 0 0 0.5rem 0;
+            font-weight: 800;
+        }
+
+        .form-header p {
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        h2 {
+            color: var(--primary-hover);
+            font-size: 1.3rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+            grid-column: 1 / -1;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        label.required-field::after {
+            content: " *";
+            color: var(--error-color);
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            background-color: #f8fafc;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-sky);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+            background-color: #fff;
+        }
+
+        /* Built-in browser validation styling */
+        input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
+            border-color: var(--error-color);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        }
+
+        textarea {
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .checkbox-grid, .radio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+            grid-column: 1 / -1;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .option-label:hover {
+            background: #e2e8f0;
+        }
+
+        .option-label input {
+            accent-color: var(--primary-sky);
+            width: 17px;
+            height: 17px;
+        }
+
+        .table-responsive {
+            grid-column: 1 / -1;
+            overflow-x: auto;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: var(--primary-sky);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+            font-weight: 500;
+            width: 30%;
+        }
+
+        td:first-child {
+            background-color: #f8fafc;
+        }
+
+        table input[type="radio"] {
+            accent-color: var(--primary-sky);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .table-caption {
+            background-color: #1e293b;
+            color: #fff;
+            text-align: left;
+            padding: 0.6rem 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        input[type="file"]::file-selector-button {
+            border: none;
+            background: #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+
+        input[type="color"] {
+            border: none;
+            width: 120px;
+            height: 42px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #f8fafc;
+            padding: 4px;
+            box-sizing: border-box;
+            border: 1px solid var(--border-gray);
+        }
+
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-submit {
+            background: var(--primary-sky);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-reset {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .btn-reset:hover {
+            background: #cbd5e1;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            body { padding: 1rem; }
+            .form-container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="form-header">
+        <h1>Personal Detail Form</h1>
+        <p>Please provide your profile and capability credentials below. Fields marked with <span style="color:var(--error-color)">*</span> are required.</p>
+    </div>
+
+    <form onsubmit="return validateForm(event)">
+        <div class="grid-2">
+            <h2>Account Credentials & Identification</h2>
+            
+            <div class="form-group">
+                <label for="user-id" class="required-field">Identification ID</label>
+                <input type="text" id="user-id" placeholder="Enter ID number..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="age" class="required-field">Age</label>
+                <input type="text" id="age" placeholder="Enter age..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="firstname" class="required-field">First Name</label>
+                <input type="text" id="firstname" placeholder="Enter first name..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastname" class="required-field">Last Name</label>
+                <input type="text" id="lastname" placeholder="Enter last name..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="username" class="required-field">Username</label>
+                <input type="text" id="username" placeholder="Enter custom username..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="required-field">Email Address</label>
+                <input type="email" id="email" placeholder="example@domain.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pass1" class="required-field">Password 1</label>
+                <input type="password" id="pass1" placeholder="••••••••" required>
+            </div>
+
+            <div class="form-group">
+                <label for="repass1" class="required-field">Re-enter Password 1</label>
+                <input type="password" id="repass1" placeholder="••••••••" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pass2">Password 2</label>
+                <input type="password" id="pass2" placeholder="••••••••">
+            </div>
+
+            <div class="form-group">
+                <label for="repass2">Re-enter Password 2</label>
+                <input type="password" id="repass2" placeholder="••••••••">
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="required-field">Phone Number</label>
+                <input type="tel" id="phone" placeholder="+251..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="region">Place of Birth (Region)</label>
+                <select id="region">
+                    <option value="afar">Afar</option>
+                    <option value="amhara">Amhara</option>
+                    <option value="oromia">Oromia</option>
+                    <option value="tigray">Tigray</option>
+                    <option value="addis-ababa">Addis Ababa</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h2>Sex Selection</h2>
+                <div class="radio-grid">
+                    <label class="option-label"><input type="radio" name="sex" value="male" checked> Male</label>
+                    <label class="option-label"><input type="radio" name="sex" value="female"> Female</label>
+                    <label class="option-label"><input type="radio" name="sex" value="both"> Both</label>
+                </div>
+            </div>
+
+            <div>
+                <h2>Marital Status</h2>
+                <div class="radio-grid">
+                    <label class="option-label"><input type="radio" name="marital" value="married"> Married</label>
+                    <label class="option-label"><input type="radio" name="marital" value="single" checked> Single</label>
+                    <label class="option-label"><input type="radio" name="marital" value="divorced"> Divorced</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 1rem;">
+            <h2>Social Connectivity Profiles</h2>
+            <div class="form-group">
+                <label for="linkedin">LinkedIn Handle</label>
+                <input type="text" id="linkedin" placeholder="linkedin.com/in/...">
+            </div>
+            <div class="form-group">
+                <label for="telegram">Telegram Handle</label>
+                <input type="text" id="telegram" placeholder="@username">
+            </div>
+            <div class="form-group">
+                <label for="github">GitHub Directory</label>
+                <input type="text" id="github" placeholder="github.com/...">
+            </div>
+        </div>
+
+        <div>
+            <h2>Educational Background</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Academic Level</th>
+                            <th>Institute Identity Name / Destination Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Elementary Base School</td><td><input type="text" placeholder="Enter base institute title"></td></tr>
+                        <tr><td>Junior Secondary Level</td><td><input type="text" placeholder="Enter junior high institute title"></td></tr>
+                        <tr><td>Senior Secondary High School</td><td><input type="text" placeholder="Enter high school institute title"checked></td></tr>
+                        <tr><td>Undergraduate Degree Program</td><td><input type="text" placeholder="Enter college or university name"></td></tr>
+                        <tr><td>Postgraduate / Specialist Degree</td><td><input type="text" placeholder="Enter university academy name"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <h2>Capability Metrics Matrix</h2>
+            
+            <div class="table-responsive">
+                <div class="table-caption">English Language Skillset Evaluation</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Competency Skill Row</th>
+                            <th>Very High</th>
+                            <th> High</th>
+                            <th>Low</th>
+                            <th>Very Low</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Listening Performance</td>
+                            <td><input type="radio" name="eng_listening" value="very_high" checked></td>
+                            <td><input type="radio" name="eng_listening" value="high"></td>
+                            <td><input type="radio" name="eng_listening" value="low"></td>
+                            <td><input type="radio" name="eng_listening" value="very_low"></td>
+                        </tr>
+                        <tr>
+                            <td>Speaking Articulation</td>
+                            <td><input type="radio" name="eng_speaking" value="very_high"></td>
+                            <td><input type="radio" name="eng_speaking" value="high"></td>
+                            <td><input type="radio" name="eng_speaking" value="low" checked></td>
+                            <td><input type="radio" name="eng_speaking" value="very_low"></td>
+                        </tr>
+                        <tr>
+                            <td>Reading Interpretation</td>
+                            <td><input type="radio" name="eng_reading" value="very_high"></td>
+                            <td><input type="radio" name="eng_reading" value="high"></td>
+                            <td><input type="radio" name="eng_reading" value="low"checked></td>
+                            <td><input type="radio" name="eng_reading" value="very_low"></td>
+                        </tr>
+                        <tr>
+                            <td>Writing Composition</td>
+                            <td><input type="radio" name="eng_writing" value="very_high"></td>
+                            <td><input type="radio" name="eng_writing" value="high" checked></td>
+                            <td><input type="radio" name="eng_writing" value="low"></td>
+                            <td><input type="radio" name="eng_writing" value="very_low"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-responsive">
+                <div class="table-caption">Computer Software Execution Skill</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Software Toolkit System</th>
+                            <th>Very High</th>
+                            <th>High</th>
+                            <th>Low</th>
+                            <th>Very Low</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MS Excel Workbooks</td>
+                            <td><input type="radio" name="comp_excel" value="very_high"></td>
+                            <td><input type="radio" name="comp_excel" value="high"></td>
+                            <td><input type="radio" name="comp_excel" value="low"></td>
+                            <td><input type="radio" name="comp_excel" value="very_low"></td>
+                        </tr>
+                        <tr>
+                            <td>MS PowerPoint Presentation</td>
+                            <td><input type="radio" name="comp_ppt" value="very_high"></td>
+                            <td><input type="radio" name="comp_ppt" value="high"></td>
+                            <td><input type="radio" name="comp_ppt" value="low"></td>
+                            <td><input type="radio" name="comp_ppt" value="very_low"></td>
+                        </tr>
+                        <tr>
+                            <td>MS Word Documents</td>
+                            <td><input type="radio" name="comp_word" value="very_high"></td>
+                            <td><input type="radio" name="comp_word" value="high"></td>
+                            <td><input type="radio" name="comp_word" value="low"></td>
+                            <td><input type="radio" name="comp_word" value="very_low"></td>
+                        </tr>
+                        <tr>
+                            <td>MS Publisher Design Templates</td>
+                            <td><input type="radio" name="comp_pub" value="very_high"></td>
+                            <td><input type="radio" name="comp_pub" value="high"></td>
+                            <td><input type="radio" name="comp_pub" value="low"></td>
+                            <td><input type="radio" name="comp_pub" value="very_low"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <h2>Occupational Preference & Routines</h2>
+            <div class="form-group">
+                <label for="career-field">Targeted Professional Career Sector</label>
+                <select id="career-field">
+                    <option value="tech">Technology & Systems Development</option>
+                    <option value="education">Academic Education & Pedagogy</option>
+                    <option value="engineering">Industrial Engineering & Infrastructure</option>
+                    <option value="business">Corporate Management & Finance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="career-interest">Specific Career Interest Focus</label>
+                <select id="career-interest">
+                    <option value="software-eng">Software Engineering / Development</option>
+                    <option value="data-science">Data Analytics & AI Research</option>
+                    <option value="network-admin">Network Architecture & Security</option>
+                    <option value="ui-ux">UI/UX Design & Product Strategy</option>
+                    <option value="project-mgr">Technical Project Management</option>
+                </select>
+            </div>
+            <div class="form-group full-width">
+                <label for="fav-food">Favorite Food / Core Culinary Cuisine</label>
+                <input type="text" id="fav-food" placeholder="e.g., Traditional Stew, Continental Pasta Varieties...">
+            </div>
+            <div class="form-group full-width">
+                <label for="daily-routine">Typical Daily Activity Operational Schedule</label>
+                <textarea id="daily-routine" rows="3" placeholder="Outline your active operational timeline or shifts here..."></textarea>
+            </div>
+        </div>
+
+        <div>
+            <h2>Personal Hobbies & Extracurricular Activities</h2>
+            <div class="checkbox-grid">
+                <label class="option-label"><input type="checkbox"> Digital Illustration</label>
+                <label class="option-label"><input type="checkbox"> Landscape Photography</label>
+                <label class="option-label"><input type="checkbox"> Playing Musical Instruments</label>
+                <label class="option-label"><input type="checkbox"> Long-Distance Cycling</label>
+                <label class="option-label"><input type="checkbox"> Strategy Board Games</label>
+                <label class="option-label"><input type="checkbox"> Creative Writing</label>
+                <label class="option-label"><input type="checkbox"> Community Volunteering</label>
+            </div>
+
+            <h2>Allergenic Sensitivities & Medical Constraints</h2>
+            <div class="checkbox-grid">
+                <label class="option-label"><input type="checkbox"> Antibiotic Formulations</label>
+                <label class="option-label"><input type="checkbox"> Airborne Pollen Spoils</label>
+                <label class="option-label"><input type="checkbox"> Dairy Derivative Products</label>
+                <label class="option-label"><input type="checkbox"> Marine Seafood Organisms</label>
+                <label class="option-label"><input type="checkbox"> Natural Insect Venom Toxins</label>
+                <label class="option-label"><input type="checkbox"> Synthetic Polymer Latex</label>
+            </div>
+
+            <h2>Routine Habits & Behavioral Focus Tendencies</h2>
+            <div class="checkbox-grid">
+                <label class="option-label"><input type="checkbox"> High Daily Screen Time</label>
+                <label class="option-label"><input type="checkbox"> Midnight Productivity Sessions</label>
+                <label class="option-label"><input type="checkbox"> Regular Snack Intermissions</label>
+                <label class="option-label"><input type="checkbox"> Intensive Audio Stream Listening</label>
+                <label class="option-label"><input type="checkbox"> Impulse Online Procurement</label>
+                <label class="option-label"><input type="checkbox"> Procrastination Cycles</label>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 1rem;">
+            <h2>File Attachments & Decorative Customization</h2>
+            <div class="form-group">
+                <label for="file-upload">Upload File Attachments</label>
+                <input type="file" id="file-upload">
+            </div>
+            <div class="form-group">
+                <label for="fav-color">Identify Personal Favorite Color Hue</label>
+                <input type="color" id="fav-color" value="#0ea5e9">
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-submit">Submit Record</button>
+            <button type="reset" class="btn btn-reset">Reset Form Data</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function validateForm(event) {
+        // Double-check password matching before allowing submission
+        var p1 = document.getElementById("pass1").value;
+        var p2 = document.getElementById("repass1").value;
+        
+        if (p1 !== p2) {
+            alert("Error: Password 1 and its validation confirmation do not match!");
+            event.preventDefault(); // Stop submission
+            return false;
+        }
+        
+        alert("Success: Form completed accurately!");
+        return true;
+    }
+</script>
+
+</body>
+</html>

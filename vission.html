@@ -1,0 +1,119 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standalone Vision Component</title>
+    <style>
+        :root {
+            --primary-sky: #0ea5e9; 
+            --primary-hover: #0284c7;
+            --bg-neutral: #f8fafc;
+            --card-white: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-gray: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-neutral);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Standalone Vision Card Component */
+        .vision-card {
+            background: var(--card-white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-gray);
+            width: 100%;
+            max-width: 950px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .vision-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-sky);
+            box-shadow: 0 16px 30px -10px rgba(14, 165, 233, 0.15);
+        }
+
+        /* Left-side decorative accent line */
+        .vision-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-sky);
+        }
+
+        .icon-container {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--primary-hover);
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-container svg {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .vision-card h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .vision-card p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .vision-card {
+                padding: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="vision-card">
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+        </div>
+        <h3>Our Vision</h3>
+        <p>To build an inclusive, high-quality education system that produces competent, ethical, and innovative citizens ready to drive Ethiopia’s growth and prosperty.</p>
+    </div>
+
+</body>
+</html>
